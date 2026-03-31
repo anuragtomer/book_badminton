@@ -2,7 +2,7 @@ name: Daily API Call
 on:
   schedule:
     # Cron is in UTC. If you are EST (UTC-5), 9 PM is 02:00 UTC.
-    - cron: '0 2 * * *' 
+    - cron: '30 15 * * *' 
   workflow_dispatch: # Allows you to run it manually for testing
 
 jobs:
