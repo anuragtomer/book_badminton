@@ -11,7 +11,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Run Script
+      - name: Run booking script
+        env:
+          # This maps the GitHub Secret to a Shell Environment Variable
+          CSRF_TOKEN: ${{ secrets.CSRF_TOKEN }}
+          SESSION_ID: ${{ secrets.SESSION_ID }}
         run: |
           chmod +x booking.sh
           ./booking.sh
