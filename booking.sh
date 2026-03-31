@@ -13,8 +13,8 @@ C1_7PM_SLOT="383271"
 C2_7PM_SLOT="383271"
 
 HOUSE_ID="6990964"
-CSRF_TOKEN=
-SESSION_ID=
+CSRF_TOKEN=${{secrets.CSRF_TOKEN}}
+SESSION_ID=${{secrets.SESSION_ID}}
 
 # Calculate Date: Today + 2 days (Format: 01 Apr 2026)
 TARGET_DATE=$(date -v+2d +"%d %b %Y")
