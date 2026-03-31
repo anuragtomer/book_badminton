@@ -13,11 +13,11 @@ C1_7PM_SLOT="383271"
 C2_7PM_SLOT="383271"
 
 HOUSE_ID="6990964"
-CSRF_TOKEN=${{secrets.CSRF_TOKEN}}
-SESSION_ID=${{secrets.SESSION_ID}}
+TOKEN_VAL="$CSRF_TOKEN"
+SESS_VAL="$SESSION_ID"
 
 # Calculate Date: Today + 2 days (Format: 01 Apr 2026)
-TARGET_DATE=$(date -v+2d +"%d %b %Y")
+TARGET_DATE=$(date -d "+2 days" +"%d %b %Y")
 
 echo "Attempting to book for $TARGET_DATE..."
 
@@ -29,11 +29,11 @@ attempt_booking() {
     echo "Trying $label (Court: $court, Slot: $slot)..."
 
     RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" 'https://keyaaroundthelife.ul.mygate.com/timeslot/booking/dashboard' \
-      -H "Cookie: csrftoken=$CSRF_TOKEN; sessionid=$SESSION_ID" \
+      -H "Cookie: csrftoken=$TOKEN_VAL; sessionid=$SESS_VAL" \
       -H "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:149.0) Gecko/20100101 Firefox/149.0" \
       -H "Origin: https://keyaaroundthelife.ul.mygate.com" \
       -H "Referer: https://keyaaroundthelife.ul.mygate.com/amenity/booking/confirm/dashboard" \
-      -F "csrfmiddlewaretoken=$CSRF_TOKEN" \
+      -F "csrfmiddlewaretoken=$TOKEN_VAL" \
       -F "amenity_id=$court" \
       -F "dates=$TARGET_DATE" \
       -F "slot_list=$slot" \
